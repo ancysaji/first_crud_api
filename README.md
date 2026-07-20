@@ -7,7 +7,7 @@ A simple CRUD API built using FastAPI for managing a task list.
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/ancysaji/first_crud_api.git
 ```
 
 ### 2. Navigate into the project
