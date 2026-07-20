@@ -3,7 +3,8 @@ from pydantic import BaseModel
 
 app = FastAPI(
     title="Task API",
-    version="1.0"
+    version="1.0",
+    description="A simple CRUD API for managing tasks"
 )
 
 
@@ -33,7 +34,10 @@ class TaskUpdate(BaseModel):
     done: bool | None = None
 
 
-@app.get("/")
+@app.get(
+    "/",
+    description="Returns information about this API"
+)
 def root():
     return {
         "name": "Task API",
@@ -42,19 +46,28 @@ def root():
     }
 
 
-@app.get("/health")
+@app.get(
+    "/health",
+    description="Checks whether the API is running"
+)
 def health():
     return {
         "status": "ok"
     }
 
 
-@app.get("/tasks")
+@app.get(
+    "/tasks",
+    description="Displays all tasks"
+)
 def get_tasks():
     return tasks
 
 
-@app.get("/tasks/{task_id}")
+@app.get(
+    "/tasks/{task_id}",
+    description="Returns a single task by ID"
+)
 def get_task(task_id: int):
 
     for task in tasks:
@@ -68,7 +81,11 @@ def get_task(task_id: int):
         }
     )
 
-@app.post("/tasks", status_code=201)
+@app.post(
+    "/tasks",
+    status_code=201,
+    description="Creates a new task"
+)
 def create_task(task: TaskCreate):
 
     new_task = {
@@ -81,7 +98,10 @@ def create_task(task: TaskCreate):
 
     return new_task
 
-@app.put("/tasks/{task_id}")
+@app.put(
+    "/tasks/{task_id}",
+    description="Updates an existing task"
+)
 def update_task(task_id: int, updated_task: TaskUpdate):
 
     for task in tasks:
@@ -104,7 +124,11 @@ def update_task(task_id: int, updated_task: TaskUpdate):
         }
     )
 
-@app.delete("/tasks/{task_id}", status_code=204)
+@app.delete(
+    "/tasks/{task_id}",
+    status_code=204,
+    description="Deletes a task"
+)
 def delete_task(task_id: int):
 
     for task in tasks:
